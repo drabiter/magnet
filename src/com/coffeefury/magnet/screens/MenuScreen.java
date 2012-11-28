@@ -32,8 +32,8 @@ public class MenuScreen extends AbstractScreen {
 		table.add(select).right();
 		table.row();
 		
-		TextButton option = new TextButton("Options", getSkin());
-		option.setClickListener(new ClickListener() {
+		TextButton credit = new TextButton("Credits", getSkin());
+		credit.setClickListener(new ClickListener() {
 			
 			@Override
 			public void click(Actor actor, float x, float y) {
@@ -41,7 +41,7 @@ public class MenuScreen extends AbstractScreen {
 				
 			}
 		});
-		table.add(option).right();
+		table.add(credit).right();
 		
 		fadeIn(1.5f);
 	}

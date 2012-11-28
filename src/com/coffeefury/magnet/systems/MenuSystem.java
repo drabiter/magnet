@@ -137,9 +137,10 @@ public class MenuSystem extends Group implements System{
 			});
 		}
 		
-		waitAllMenu.setPos(x, Gdx.graphics.getHeight() - y, 0, 0);
+		float offset = Constants.SIZE * .5f; 
+		waitAllMenu.setPos(x, Gdx.graphics.getHeight() - y, offset, offset);
 		waitAllMenu.moveable = false;
-		backToLevel.setPos(x - Constants.SIZE, Gdx.graphics.getHeight() - y, 0, 0);
+		backToLevel.setPos(x - Constants.SIZE, Gdx.graphics.getHeight() - y, -offset, offset);
 		backToLevel.moveable = false;
 	}
 	
@@ -161,15 +162,15 @@ public class MenuSystem extends Group implements System{
 			this.y = y + offY;
 		}
 
-		@Override
-		public void act(float delta) {
-			// TODO Auto-generated method stub
-			super.act(delta);
-			if (moveable) {
-				this.x = lastUnit.x + offX;
-				this.y = lastUnit.y + offY;
-			}
-		}
+//		@Override
+//		public void act(float delta) {
+//			// TODO Auto-generated method stub
+//			super.act(delta);
+//			if (moveable) {
+//				this.x = lastUnit.x + offX;
+//				this.y = lastUnit.y + offY;
+//			}
+//		}
 		
 	}
 }

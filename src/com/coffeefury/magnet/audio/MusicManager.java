@@ -15,7 +15,7 @@ public class MusicManager implements Disposable {
 	 * The available music files.
 	 */
 	public enum GameMusic {
-		PLAY("sfx/bg_01.mp3");
+		BG01("sounds/");
 
 		private final String fileName;
 
@@ -70,6 +70,15 @@ public class MusicManager implements Disposable {
 		if (musicBeingPlayed != null) {
 			musicBeingPlayed.stop();
 			musicBeingPlayed.dispose();
+		}
+	}
+	
+	/**
+	 * Pauses the current music being played, if any.
+	 */
+	public void pause() {
+		if (musicBeingPlayed != null) {
+			musicBeingPlayed.pause();
 		}
 	}
 
