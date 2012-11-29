@@ -1,19 +1,19 @@
 {
 entities: [
 	{
-		class: com.coffeefury.magnet.map.Entity,
+		class: entity,
 		unitName: "SHEEP",
 		x: 480,
 		y: 360
 	},
 	{
-		class: com.coffeefury.magnet.map.Entity,
+		class: entity,
 		unitName: "FINISH",
 		x: 360,
 		y: 360
 	},
 	{
-		class: com.coffeefury.magnet.map.Entity,
+		class: entity,
 		unitName: "PUSHER",
 		x: 520,
 		y: 360

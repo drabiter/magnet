@@ -1,16 +1,17 @@
 package com.coffeefury.magnet.map;
 
-import com.badlogic.gdx.utils.Array;
+import java.util.ArrayList;
 
+@SuppressWarnings("rawtypes")
 public class Level{
 	
-	private Array<Entity> entities = null;
+	private ArrayList entities = null;
 
-	public Array<Entity> getEntities() {
+	public ArrayList getEntities() {
 		return entities;
 	}
 
-	public void setEntities(Array<Entity> entities) {
+	public void setEntities(ArrayList entities) {
 		this.entities = entities;
 	}
 
