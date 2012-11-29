@@ -92,6 +92,15 @@ public class FieldSystem extends Group implements System{
 		return (Math.abs(dx) + Math.abs(dy)) <= Constants.ATTACK_RANGE[unit.type.ordinal()];
 	}
 	
+	public boolean inAttackRadius(Unit unit, int x, int y) {
+		// TODO Auto-generated method stub
+		int targetX = x - (x % Constants.SIZE);
+		int targetY = Gdx.graphics.getHeight() - (y - (y % Constants.SIZE));
+		int dx = (int) ((unit.x - targetX) / Constants.SIZE);
+		int dy = (int) ((unit.y - targetY) / Constants.SIZE);
+		return (Math.abs(dx) + Math.abs(dy)) <= Constants.ATTACK_RANGE[unit.type.ordinal()];
+	}
+	
 //	public void moveUnitTo(Unit unit, float x, float y){
 //		unit.move(x, y);
 //	}

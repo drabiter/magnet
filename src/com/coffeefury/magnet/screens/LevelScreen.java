@@ -23,9 +23,9 @@ public class LevelScreen extends AbstractScreen {
 		// TODO Auto-generated method stub
 		super.show();
 		
-		stage.addActor(new Image(getTextureRegion("background_l,l")));
+		stage.addActor(new Image(getTextureRegion("titel_l,l")));
 
-		Table table = getTable().center();
+		Table table = getTable().bottom();
 
 		int lvlNum = Constants.TOTAL_LEVEL;
 
@@ -42,7 +42,7 @@ public class LevelScreen extends AbstractScreen {
 					fadeOut(2f, false);
 				}
 			});
-			table.add(lvl).pad(20);
+			table.add(lvl).pad(10);
 		}
 		Image back = new Image(getTextureRegion("back_l,l"));
 		back.setClickListener(new ClickListener() {

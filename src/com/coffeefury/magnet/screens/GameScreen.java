@@ -141,12 +141,17 @@ public class GameScreen extends AbstractScreen {
 						releaseUnit();
 					}
 				}else if (lastUnit.type == Type.CLONER && fieldSystem.isAttackState() && UnitSystem.getCloneQueue() != null){
-					stage = stage.concat(".10");
-					unitSystem.createUnit(UnitSystem.getCloneQueue(), x, Gdx.graphics.getHeight() - y);
-					UnitSystem.setCloneQueue(null);
-					lastUnit.played();
 					fieldSystem.clearArea();
-					releaseUnit();
+					if (fieldSystem.inAttackRadius(lastUnit, x, y)){
+						stage = stage.concat(".10");
+						unitSystem.createUnit(UnitSystem.getCloneQueue(), x, Gdx.graphics.getHeight() - y);
+						UnitSystem.setCloneQueue(null);
+						lastUnit.played();
+						releaseUnit();
+					}else{
+						stage = stage.concat(".11");
+						menuSystem.openUnitMenu(lastUnit);
+					}
 				}else{
 					if (!lastUnit.played) {
 						stage = stage.concat(".09");

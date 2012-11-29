@@ -35,31 +35,6 @@ public class MenuScreen extends AbstractScreen {
 		});
 		getStage().addActor(play);
 		
-//		Table table = getTable().right().padRight(100);
-//		
-//		TextButton select = new TextButton("Select Levels", getSkin());
-//		select.setClickListener(new ClickListener() {
-//			
-//			@Override
-//			public void click(Actor actor, float x, float y) {
-//				// TODO Auto-generated method stub
-//				game.setScreen(game.getLevelScreen());
-//			}
-//		});
-//		table.add(select).right();
-//		table.row();
-//		
-//		TextButton credit = new TextButton("Credits", getSkin());
-//		credit.setClickListener(new ClickListener() {
-//			
-//			@Override
-//			public void click(Actor actor, float x, float y) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-//		table.add(credit).right();
-		
 		fadeIn(1.5f);
 		
 		game.getMusicManager().play(GameMusic.BG01);

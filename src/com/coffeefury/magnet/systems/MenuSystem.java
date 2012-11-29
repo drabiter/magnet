@@ -71,14 +71,12 @@ public class MenuSystem extends Group implements System{
 
 	private void prepareUnitMenu(Unit unit){
 		if (attackMenu == null){
-			attackMenu = new ButtonMenu(screen.getTextureRegion("push_l,l"));
-//			attackMenu.width(Constants.SIZE).height(Constants.SIZE);
+			attackMenu = new ButtonMenu(screen.getTextureRegion("atk_".concat(unit.type.getTexture())));
 			attackMenu.setClickListener(new ClickListener(){
 
 				@Override
 				public void click(Actor actor, float x, float y) {
 					// TODO Auto-generated method stub
-//					Gdx.app.log(null, "atk");
 					( (FieldSystem) screen.getStage().findActor("fieldsystem")).selectAttackArea(lastUnit);
 				}
 				
@@ -87,7 +85,6 @@ public class MenuSystem extends Group implements System{
 		
 		if (waitMenu == null){
 			waitMenu = new ButtonMenu(screen.getTextureRegion("wait_l,l"));
-//			waitMenu.width(Constants.SIZE).height(Constants.SIZE);
 			waitMenu.setClickListener(new ClickListener() {
 				
 				@Override
@@ -101,6 +98,8 @@ public class MenuSystem extends Group implements System{
 			});
 		}
 		
+		attackMenu.getStyle().up = screen.getNinePatch("atk_".concat(unit.type.getTexture()));
+		
 		offX = ((unit.x >= Constants.SIZE)? -Constants.SIZE : Constants.SIZE);
 		offY = 0;
 		waitMenu.setPos(unit.x, unit.y, offX, offY);
@@ -112,8 +111,7 @@ public class MenuSystem extends Group implements System{
 	private void prepareMenu(int x, int y) {
 		// TODO Auto-generated method stub
 		if (waitAllMenu == null){
-			waitAllMenu = new ButtonMenu(screen.getTextureRegion("return_l,l"));
-//			waitAllMenu.width(Constants.SIZE).height(Constants.SIZE);
+			waitAllMenu = new ButtonMenu(screen.getTextureRegion("wait_all_l,l"));
 			waitAllMenu.setClickListener(new ClickListener() {
 				
 				@Override
@@ -125,8 +123,7 @@ public class MenuSystem extends Group implements System{
 		}
 		
 		if (backToLevel == null){
-			backToLevel = new ButtonMenu(screen.getTextureRegion("restart_l,l"));
-//			backToLevel.width(Constants.SIZE).height(Constants.SIZE);
+			backToLevel = new ButtonMenu(screen.getTextureRegion("return_l,l"));
 			backToLevel.setClickListener(new ClickListener() {
 				
 				@Override
@@ -146,7 +143,7 @@ public class MenuSystem extends Group implements System{
 	
 	class ButtonMenu extends Button{
 		
-		float offX, offY;
+//		float offX, offY;
 		
 		public boolean moveable;
 		
@@ -156,8 +153,8 @@ public class MenuSystem extends Group implements System{
 		}
 		
 		public void setPos(float x, float y, float offX, float offY){
-			this.offX = offX;
-			this.offY = offY;
+//			this.offX = offX;
+//			this.offY = offY;
 			this.x = x + offX;
 			this.y = y + offY;
 		}

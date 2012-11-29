@@ -9,7 +9,7 @@ entities: [
 	{
 		class: entity,
 		unitName: "FINISH",
-		x: 320,
+		x: 360,
 		y: 360
 	},
 	{

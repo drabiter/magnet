@@ -12,7 +12,7 @@ public class HUDSystem extends Group implements System {
 	AbstractScreen screen;
 	
 	Label turnLabel;
-	Label cloneLabel;
+	Image cloneIcon;
 	
 	Image turn;
 	Image clone;
@@ -25,15 +25,17 @@ public class HUDSystem extends Group implements System {
 		
 		turn = new Image(screen.getTextureRegion("turns_l,l"));
 		turnLabel = new Label(String.valueOf(numOfTurn), screen.getSkin());
-		turnLabel.x = turn.x + turn.getPrefWidth();
+		turnLabel.x = turn.x + turn.getPrefWidth() + 10;
+		turnLabel.getStyle().font.scale(.5f);
 		
 		clone = new Image(screen.getTextureRegion("nextclone_l,l"));
 		clone.y = Gdx.graphics.getHeight() - clone.getPrefHeight();
-		cloneLabel = new Label("", screen.getSkin());
-		cloneLabel.y = clone.y;
-		cloneLabel.x = clone.x + clone.getPrefWidth();
+		cloneIcon = new Image();
+		cloneIcon.y = clone.y;
+		cloneIcon.x = clone.x + clone.getPrefWidth() + 10;
+
 		this.addActor(turnLabel);
-		this.addActor(cloneLabel);
+		this.addActor(cloneIcon);
 		this.addActor(turn);
 		this.addActor(clone);
 	}
@@ -43,15 +45,16 @@ public class HUDSystem extends Group implements System {
 		// TODO Auto-generated method stub
 		super.act(delta);
 		if (UnitSystem.getCloneQueue() != null)
-			cloneLabel.setText(UnitSystem.getCloneQueue().toString());
+			cloneIcon.setRegion(screen.getTextureRegion(UnitSystem.getCloneQueue().getTexture()));
 		else
-			cloneLabel.setText("");
+			cloneIcon.setRegion(null);
 	}
 
 	MovingLabel turnNotif;
 	
 	public void showTurnNotif(){
 		turnNotif = new MovingLabel(this, "TURN ".concat(String.valueOf(numOfTurn)), screen.getSkin());
+		turnNotif.getStyle().font.setScale(.75f);
 		this.addActor(turnNotif);
 		
 		updateTurn();

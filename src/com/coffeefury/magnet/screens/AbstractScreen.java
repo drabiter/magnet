@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,12 +16,15 @@ import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.coffeefury.magnet.Magnet;
 import com.coffeefury.magnet.systems.InputSystem;
 
 public abstract class AbstractScreen implements Screen {
 	public static final int GAME_VIEWPORT_WIDTH = 480,
 			GAME_VIEWPORT_HEIGHT = 320;
+	
+	private static ArrayMap<String, NinePatch> nines = new ArrayMap<String, NinePatch>();
 
 	protected final Magnet game;
 	protected final Stage stage;
@@ -79,6 +83,14 @@ public abstract class AbstractScreen implements Screen {
 	
 	public TextureRegion getTextureRegion(String name){
 		return new TextureRegion(getAtlas().findRegion(name));
+	}
+	
+	public NinePatch getNinePatch(String name){
+		NinePatch ninePatch = nines.get(name);
+		if (ninePatch == null){
+			nines.put(name, new NinePatch(getTextureRegion(name)));
+		}
+		return ninePatch;
 	}
 
 	public InputSystem getInputSystem() {

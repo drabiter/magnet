@@ -199,25 +199,53 @@ wait_all_l,l
   orig: 68, 18
   offset: 0, 0
   index: -1
-pusher_l,l
+restart_l,l
   rotate: false
-  xy: 803, 481
-  size: 40, 40
-  orig: 40, 40
+  xy: 803, 503
+  size: 65, 18
+  orig: 65, 18
   offset: 0, 0
   index: -1
-red_l,l
+cloner_l,l
   rotate: false
-  xy: 803, 439
+  xy: 803, 461
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 puller_l,l
   rotate: false
-  xy: 845, 481
-  size: 39, 40
-  orig: 39, 40
+  xy: 803, 419
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+pusher_l,l
+  rotate: false
+  xy: 803, 377
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+red_l,l
+  rotate: false
+  xy: 803, 335
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+sheep_l,l
+  rotate: false
+  xy: 803, 293
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+target_l,l
+  rotate: false
+  xy: 803, 251
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 return_l,l
@@ -227,18 +255,11 @@ return_l,l
   orig: 59, 17
   offset: 0, 0
   index: -1
-target_l,l
+atk_cloner_l,l
   rotate: false
-  xy: 915, 929
-  size: 28, 40
-  orig: 28, 40
-  offset: 0, 0
-  index: -1
-sheep_l,l
-  rotate: false
-  xy: 803, 399
-  size: 28, 38
-  orig: 28, 38
+  xy: 358, 9
+  size: 47, 18
+  orig: 47, 18
   offset: 0, 0
   index: -1
 clone_l,l
@@ -250,44 +271,51 @@ clone_l,l
   index: -1
 blue_l,l
   rotate: false
-  xy: 845, 447
+  xy: 803, 217
   size: 32, 32
   orig: 32, 32
-  offset: 0, 0
-  index: -1
-cloner_l,l
-  rotate: false
-  xy: 886, 481
-  size: 20, 40
-  orig: 20, 40
   offset: 0, 0
   index: -1
 green_l,l
   rotate: false
-  xy: 915, 895
+  xy: 803, 183
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-push_l,l
+atk_pusher_l,l
   rotate: false
-  xy: 407, 10
+  xy: 870, 504
   size: 41, 17
   orig: 41, 17
   offset: 0, 0
   index: -1
-pull_l,l
+push_l,l
   rotate: false
-  xy: 450, 10
-  size: 38, 17
-  orig: 38, 17
+  xy: 870, 504
+  size: 41, 17
+  orig: 41, 17
   offset: 0, 0
   index: -1
 wait_l,l
   rotate: false
-  xy: 490, 9
+  xy: 407, 9
   size: 38, 18
   orig: 38, 18
+  offset: 0, 0
+  index: -1
+atk_puller_l,l
+  rotate: false
+  xy: 447, 10
+  size: 38, 17
+  orig: 38, 17
+  offset: 0, 0
+  index: -1
+pull_l,l
+  rotate: false
+  xy: 447, 10
+  size: 38, 17
+  orig: 38, 17
   offset: 0, 0
   index: -1
 
