@@ -4,13 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.coffeefury.magnet.Magnet;
 import com.coffeefury.magnet.components.Unit;
 import com.coffeefury.magnet.systems.FieldSystem;
 import com.coffeefury.magnet.systems.GameInputSystem;
 import com.coffeefury.magnet.systems.HUDSystem;
 import com.coffeefury.magnet.systems.MenuSystem;
-import com.coffeefury.magnet.systems.TerrainSystem;
 import com.coffeefury.magnet.systems.UnitSystem;
 import com.coffeefury.magnet.systems.UnitSystem.Type;
 import com.coffeefury.magnet.utils.Constants;
@@ -22,7 +22,6 @@ public class GameScreen extends AbstractScreen {
 	FieldSystem fieldSystem;
 	HUDSystem hudSystem;
 	MenuSystem menuSystem;
-	TerrainSystem terrainSystem;
 	UnitSystem unitSystem;
 
 	public GameScreen(Magnet game) {
@@ -41,16 +40,15 @@ public class GameScreen extends AbstractScreen {
 		hudSystem = new HUDSystem(this);
 		menuSystem = new MenuSystem(this);
 		unitSystem = new UnitSystem(this);
-		terrainSystem = new TerrainSystem(this);
 		
-		stage.addActor(terrainSystem);
+		stage.addActor(new Image(getTextureRegion("background_l,l")));
+		
 		stage.addActor(fieldSystem);
 		stage.addActor(unitSystem);
 		stage.addActor(menuSystem);
 		stage.addActor(hudSystem);
 		
 		unitSystem.create(UtilsBase.loadLevel(Constants.level));
-		UtilsBase.createTerrain(terrainSystem);
 		
 		fadeIn(1.5f);
 	}
@@ -188,7 +186,6 @@ public class GameScreen extends AbstractScreen {
 		hudSystem = null;
 		menuSystem = null;
 		unitSystem = null;
-		terrainSystem = null;
 	}
 
 	@Override

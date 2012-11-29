@@ -2,7 +2,7 @@ package com.coffeefury.magnet.utils;
 
 public class Constants {
 	
-	public static final int TILE_W = 20, TILE_H = 12, SIZE = 40, TOTAL_LEVEL = 1;
+	public static final int TILE_W = 20, TILE_H = 12, SIZE = 40, TOTAL_LEVEL = 6;
 	
 	public static int level = 2;
 	

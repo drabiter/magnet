@@ -7,7 +7,7 @@
                         downFontColor: { r: 0.52, g: 0.56, b: 0.6, a: 1 }
                 },
                 com.badlogic.gdx.graphics.g2d.BitmapFont: {
-                        default-font: { file: default.fnt, fontColor: white }
+                        default-font: { file: default.fnt, fontColor: white,  }
                 }
         },
         styles: {

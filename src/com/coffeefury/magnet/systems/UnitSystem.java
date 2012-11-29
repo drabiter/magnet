@@ -28,7 +28,7 @@ public class UnitSystem extends Group implements System {
 
 	public enum Type {
 		PULLER("puller_l,l", AttackType.FIELDER, true), PUSHER("pusher_l,l",
-				AttackType.FIELDER, true), CLONER("cloner",
+				AttackType.FIELDER, true), CLONER("cloner_l,l",
 				AttackType.CLONE, true), SHEEP("sheep_l,l", AttackType.NULL,
 				false), FINISH("target_l,l", AttackType.NULL, false), ;
 
@@ -196,7 +196,9 @@ public class UnitSystem extends Group implements System {
 
 	public void create(Level level) {
 		// TODO Auto-generated method stub
-		for (Entity e : level.getEntities()) {
+		Entity e;
+		for (Object o : level.getEntities()) {
+			e = (Entity) o;
 			Type type = Type.valueOf(e.unitName);
 			createUnit(type, e.x, e.y);
 		}

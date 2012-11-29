@@ -2,9 +2,9 @@ package com.coffeefury.magnet.screens;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.coffeefury.magnet.Magnet;
-import com.coffeefury.magnet.utils.Constants;
 
 public class PassingScreen extends AbstractScreen {
 
@@ -17,10 +17,15 @@ public class PassingScreen extends AbstractScreen {
 	public void show() {
 		// TODO Auto-generated method stub
 		super.show();
+		
+		stage.addActor(new Image(getTextureRegion("background_l,l")));
+		
+		Table table = getTable();
+		
+		table.add(new Image(getTextureRegion("win_l,l")));
+		table.row();
 
-		String text = "STAGE ".concat(String.valueOf(Constants.level)).concat(
-				"\n- click here to start -");
-		TextButton next = new TextButton(text, getSkin());
+		Image next = new Image(getTextureRegion("next_l,l"));
 		next.setClickListener(new ClickListener() {
 
 			@Override
@@ -29,7 +34,19 @@ public class PassingScreen extends AbstractScreen {
 				fadeOut(2f, false);
 			}
 		});
-		getTable().add(next).center();
+		table.add(next).center().spaceTop(150);
+		table.row();
+		
+		Image back = new Image(getTextureRegion("back_l,l"));
+		back.setClickListener(new ClickListener() {
+
+			@Override
+			public void click(Actor actor, float x, float y) {
+				// TODO Auto-generated method stub
+				game.setScreen(game.getMenuScreen());
+			}
+		});
+		table.add(back).center();
 		
 		fadeIn(1.5f);
 	}

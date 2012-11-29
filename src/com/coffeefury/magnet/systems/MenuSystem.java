@@ -71,8 +71,8 @@ public class MenuSystem extends Group implements System{
 
 	private void prepareUnitMenu(Unit unit){
 		if (attackMenu == null){
-			attackMenu = new ButtonMenu(screen.getTextureRegion("green_l,l"));
-			attackMenu.width(Constants.SIZE).height(Constants.SIZE);
+			attackMenu = new ButtonMenu(screen.getTextureRegion("push_l,l"));
+//			attackMenu.width(Constants.SIZE).height(Constants.SIZE);
 			attackMenu.setClickListener(new ClickListener(){
 
 				@Override
@@ -86,8 +86,8 @@ public class MenuSystem extends Group implements System{
 		}
 		
 		if (waitMenu == null){
-			waitMenu = new ButtonMenu(screen.getTextureRegion("yellow_l,l"));
-			waitMenu.width(Constants.SIZE).height(Constants.SIZE);
+			waitMenu = new ButtonMenu(screen.getTextureRegion("wait_l,l"));
+//			waitMenu.width(Constants.SIZE).height(Constants.SIZE);
 			waitMenu.setClickListener(new ClickListener() {
 				
 				@Override
@@ -112,8 +112,8 @@ public class MenuSystem extends Group implements System{
 	private void prepareMenu(int x, int y) {
 		// TODO Auto-generated method stub
 		if (waitAllMenu == null){
-			waitAllMenu = new ButtonMenu(screen.getTextureRegion("pink_l,l"));
-			waitAllMenu.width(Constants.SIZE).height(Constants.SIZE);
+			waitAllMenu = new ButtonMenu(screen.getTextureRegion("return_l,l"));
+//			waitAllMenu.width(Constants.SIZE).height(Constants.SIZE);
 			waitAllMenu.setClickListener(new ClickListener() {
 				
 				@Override
@@ -125,8 +125,8 @@ public class MenuSystem extends Group implements System{
 		}
 		
 		if (backToLevel == null){
-			backToLevel = new ButtonMenu(screen.getTextureRegion("purple_l,l"));
-			backToLevel.width(Constants.SIZE).height(Constants.SIZE);
+			backToLevel = new ButtonMenu(screen.getTextureRegion("restart_l,l"));
+//			backToLevel.width(Constants.SIZE).height(Constants.SIZE);
 			backToLevel.setClickListener(new ClickListener() {
 				
 				@Override

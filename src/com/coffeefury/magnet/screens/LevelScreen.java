@@ -1,10 +1,11 @@
 package com.coffeefury.magnet.screens;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.utils.Scaling;
 import com.coffeefury.magnet.Magnet;
 import com.coffeefury.magnet.utils.Constants;
 
@@ -17,22 +18,21 @@ public class LevelScreen extends AbstractScreen {
 
 	private static final int ROW = 5;
 
-	private static final String LEVEL = "Level ";
-
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		super.show();
+		
+		stage.addActor(new Image(getTextureRegion("background_l,l")));
 
 		Table table = getTable().center();
 
 		int lvlNum = Constants.TOTAL_LEVEL;
 
 		for (int i = 1; i <= lvlNum; i++) {
-			if (i > ROW)
-				table.row();
-			TextButton lvl = new TextButton(LEVEL + i, getSkin().getStyle(
-					"default", TextButtonStyle.class), String.valueOf(i));
+			if (i > ROW) table.row();
+			String name = String.valueOf(i);
+			Image lvl = new Image(getTextureRegion("lv_".concat(name).concat("_l,l")), Scaling.stretch, Align.CENTER, name);
 			lvl.setClickListener(new ClickListener() {
 
 				@Override
@@ -44,7 +44,7 @@ public class LevelScreen extends AbstractScreen {
 			});
 			table.add(lvl).pad(20);
 		}
-		TextButton back = new TextButton("Back to Menu", getSkin());
+		Image back = new Image(getTextureRegion("back_l,l"));
 		back.setClickListener(new ClickListener() {
 
 			@Override

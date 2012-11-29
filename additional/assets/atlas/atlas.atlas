@@ -3,108 +3,302 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-cloner
+background_l,l
   rotate: false
-  xy: 1, 213
-  size: 40, 40
-  orig: 40, 40
+  xy: 1, 543
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
-puller_l,l
+titel_l,l
   rotate: false
-  xy: 1, 171
-  size: 40, 40
-  orig: 40, 40
+  xy: 1, 61
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+nextclone_l,l
+  rotate: false
+  xy: 803, 997
+  size: 154, 26
+  orig: 154, 26
+  offset: 0, 0
+  index: -1
+play_l,l
+  rotate: false
+  xy: 1, 8
+  size: 128, 51
+  orig: 128, 51
+  offset: 0, 0
+  index: -1
+next_l,l
+  rotate: false
+  xy: 803, 971
+  size: 142, 24
+  orig: 142, 24
+  offset: 0, 0
+  index: -1
+lv_10_l,l
+  rotate: false
+  xy: 131, 29
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+turns_l,l
+  rotate: false
+  xy: 131, 1
+  size: 90, 26
+  orig: 90, 26
+  offset: 0, 0
+  index: -1
+lv_11_l,l
+  rotate: false
+  xy: 803, 939
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_12_l,l
+  rotate: false
+  xy: 243, 29
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+back_l,l
+  rotate: false
+  xy: 223, 1
+  size: 63, 26
+  orig: 63, 26
+  offset: 0, 0
+  index: -1
+lv_13_l,l
+  rotate: false
+  xy: 803, 907
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_14_l,l
+  rotate: false
+  xy: 355, 29
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_15_l,l
+  rotate: false
+  xy: 803, 875
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_16_l,l
+  rotate: false
+  xy: 467, 29
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_17_l,l
+  rotate: false
+  xy: 803, 843
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_18_l,l
+  rotate: false
+  xy: 579, 29
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_19_l,l
+  rotate: false
+  xy: 803, 811
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_1_l,l
+  rotate: false
+  xy: 691, 29
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_20_l,l
+  rotate: false
+  xy: 803, 779
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_2_l,l
+  rotate: false
+  xy: 803, 747
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_3_l,l
+  rotate: false
+  xy: 803, 715
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_4_l,l
+  rotate: false
+  xy: 803, 683
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_5_l,l
+  rotate: false
+  xy: 803, 651
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_6_l,l
+  rotate: false
+  xy: 803, 619
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_7_l,l
+  rotate: false
+  xy: 803, 587
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_8_l,l
+  rotate: false
+  xy: 803, 555
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+lv_9_l,l
+  rotate: false
+  xy: 803, 523
+  size: 110, 30
+  orig: 110, 30
+  offset: 0, 0
+  index: -1
+wait_all_l,l
+  rotate: false
+  xy: 288, 9
+  size: 68, 18
+  orig: 68, 18
   offset: 0, 0
   index: -1
 pusher_l,l
   rotate: false
-  xy: 43, 213
+  xy: 803, 481
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 red_l,l
   rotate: false
-  xy: 1, 129
+  xy: 803, 439
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-sheep_l,l
+puller_l,l
   rotate: false
-  xy: 43, 171
-  size: 40, 40
-  orig: 40, 40
+  xy: 845, 481
+  size: 39, 40
+  orig: 39, 40
+  offset: 0, 0
+  index: -1
+return_l,l
+  rotate: false
+  xy: 959, 1006
+  size: 59, 17
+  orig: 59, 17
   offset: 0, 0
   index: -1
 target_l,l
   rotate: false
-  xy: 85, 213
-  size: 40, 40
-  orig: 40, 40
+  xy: 915, 929
+  size: 28, 40
+  orig: 28, 40
   offset: 0, 0
   index: -1
-pink_l,l
+sheep_l,l
   rotate: false
-  xy: 1, 89
-  size: 38, 38
-  orig: 38, 38
+  xy: 803, 399
+  size: 28, 38
+  orig: 28, 38
+  offset: 0, 0
+  index: -1
+clone_l,l
+  rotate: false
+  xy: 358, 9
+  size: 47, 18
+  orig: 47, 18
   offset: 0, 0
   index: -1
 blue_l,l
   rotate: false
-  xy: 43, 137
+  xy: 845, 447
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-brown_l,l
+cloner_l,l
   rotate: false
-  xy: 85, 179
-  size: 32, 32
-  orig: 32, 32
+  xy: 886, 481
+  size: 20, 40
+  orig: 20, 40
   offset: 0, 0
   index: -1
 green_l,l
   rotate: false
-  xy: 1, 55
+  xy: 915, 895
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-grey_l,l
+push_l,l
   rotate: false
-  xy: 1, 21
-  size: 32, 32
-  orig: 32, 32
+  xy: 407, 10
+  size: 41, 17
+  orig: 41, 17
   offset: 0, 0
   index: -1
-orange_l,l
+pull_l,l
   rotate: false
-  xy: 43, 103
-  size: 32, 32
-  orig: 32, 32
+  xy: 450, 10
+  size: 38, 17
+  orig: 38, 17
   offset: 0, 0
   index: -1
-purple_l,l
+wait_l,l
   rotate: false
-  xy: 41, 69
-  size: 32, 32
-  orig: 32, 32
+  xy: 490, 9
+  size: 38, 18
+  orig: 38, 18
   offset: 0, 0
   index: -1
-terrain_l,l
+
+atlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+win_l,l
   rotate: false
-  xy: 35, 35
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-yellow_l,l
-  rotate: false
-  xy: 35, 1
-  size: 32, 32
-  orig: 32, 32
+  xy: 1, 1
+  size: 372, 150
+  orig: 372, 150
   offset: 0, 0
   index: -1

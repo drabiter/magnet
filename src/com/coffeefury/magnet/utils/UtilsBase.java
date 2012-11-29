@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.Json;
 import com.coffeefury.magnet.components.Unit;
 import com.coffeefury.magnet.map.Entity;
 import com.coffeefury.magnet.map.Level;
-import com.coffeefury.magnet.systems.TerrainSystem;
 
 public class UtilsBase {
 	
@@ -18,14 +17,6 @@ public class UtilsBase {
 		private Facing(int x, int y){
 			xd = x;
 			yd = y;
-		}
-	}
-	
-	public static void createTerrain(TerrainSystem terrainSystem){
-		for (int i = 0; i < Constants.TILE_W; i++){
-			for (int j = 0; j < Constants.TILE_H; j++){
-				terrainSystem.createPlain(i * Constants.SIZE, j * Constants.SIZE);
-			}
 		}
 	}
 	
