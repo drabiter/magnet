@@ -15,20 +15,8 @@ entities: [
 	{
 		class: entity,
 		unitName: "PUSHER",
-		x: 40,
-		y: 160
-	},
-	{
-		class: entity,
-		unitName: "CLONER",
-		x: 120,
-		y: 160
-	},
-	{
-		class: entity,
-		unitName: "CLONER",
 		x: 520,
-		y: 400
+		y: 360
 	}
 ]
 }

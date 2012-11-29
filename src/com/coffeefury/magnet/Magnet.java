@@ -25,7 +25,7 @@ public class Magnet extends Game {
 		
 		fpsLogger = new FPSLogger();
 		
-		setScreen(getLevelScreen());
+		setScreen(getMenuScreen());
 	}
 
 	@Override

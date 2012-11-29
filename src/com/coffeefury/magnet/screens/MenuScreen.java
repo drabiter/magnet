@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.coffeefury.magnet.Magnet;
+import com.coffeefury.magnet.audio.MusicManager.GameMusic;
 
 public class MenuScreen extends AbstractScreen {
 
@@ -44,6 +45,9 @@ public class MenuScreen extends AbstractScreen {
 		table.add(credit).right();
 		
 		fadeIn(1.5f);
+		
+		game.getMusicManager().play(GameMusic.BG01);
+		game.getMusicManager().setVolume(.5f);
 	}
 
 }

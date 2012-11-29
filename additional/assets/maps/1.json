@@ -1,40 +1,22 @@
 {
 entities: [
 	{
-		class: entity,
+		class: com.coffeefury.magnet.map.Entity,
 		unitName: "SHEEP",
-		x: 520,
+		x: 480,
 		y: 360
 	},
 	{
-		class: entity,
+		class: com.coffeefury.magnet.map.Entity,
 		unitName: "FINISH",
-		x: 160,
-		y: 240
+		x: 360,
+		y: 360
 	},
 	{
-		class: entity,
-		unitName: "PULLER",
-		x: 520,
-		y: 200
-	},
-	{
-		class: entity,
+		class: com.coffeefury.magnet.map.Entity,
 		unitName: "PUSHER",
-		x: 180,
-		y: 80
-	},
-	{
-		class: entity,
-		unitName: "CLONER",
-		x: 120,
-		y: 120
-	},
-	{
-		class: entity,
-		unitName: "CLONER",
-		x: 560,
-		y: 240
+		x: 520,
+		y: 360
 	}
 ]
 }

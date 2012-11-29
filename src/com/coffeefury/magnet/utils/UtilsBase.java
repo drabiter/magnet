@@ -1,11 +1,8 @@
 package com.coffeefury.magnet.utils;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.coffeefury.magnet.components.Unit;
-import com.coffeefury.magnet.map.Entity;
 import com.coffeefury.magnet.map.Level;
 import com.coffeefury.magnet.systems.TerrainSystem;
 
@@ -40,8 +37,8 @@ public class UtilsBase {
 	
 	public static Level loadLevel(int lvl){
 		Json json = new Json();
-		json.addClassTag("entity", Entity.class);
-		json.addClassTag("entities", ArrayList.class);
+//		json.addClassTag("entity", Entity.class);
+//		json.addClassTag("entities", ArrayList.class);
 		return json.fromJson(Level.class, Gdx.files.internal("maps/" + lvl + ".json"));
 	}
 

@@ -15,7 +15,7 @@ public class MusicManager implements Disposable {
 	 * The available music files.
 	 */
 	public enum GameMusic {
-		BG01("sounds/");
+		BG01("sounds/bg01.ogg");
 
 		private final String fileName;
 

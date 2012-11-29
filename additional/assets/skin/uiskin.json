@@ -4,7 +4,7 @@
                         white: { r: 1, g: 1, b: 1, a: 1 },
                         black: { r: 0, g: 0, b: 0, a: 1 },
                         upFontColor: { r: 0.3, g: 0.1, b: 0.2, a: 1 },
-                        downFontColor: { r: 1.0, g: 0.1, b: 0.2, a: 1 }
+                        downFontColor: { r: 0.52, g: 0.56, b: 0.6, a: 1 }
                 },
                 com.badlogic.gdx.graphics.g2d.BitmapFont: {
                         default-font: { file: default.fnt, fontColor: white }

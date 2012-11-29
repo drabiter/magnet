@@ -138,8 +138,8 @@ public abstract class AbstractScreen implements Screen {
 			skin.dispose();
 		if (atlas != null)
 			atlas.dispose(); 
-//		if (stage != null)
-//			stage.dispose();
+		
+		game.getMusicManager().stop();
 	}
 	
 	public void notified(int id){

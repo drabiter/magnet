@@ -3,38 +3,20 @@ entities: [
 	{
 		class: entity,
 		unitName: "SHEEP",
-		x: 680,
-		y: 240
+		x: 480,
+		y: 360
 	},
 	{
 		class: entity,
 		unitName: "FINISH",
-		x: 560,
-		y: 160
+		x: 360,
+		y: 360
 	},
 	{
 		class: entity,
 		unitName: "PULLER",
-		x: 80,
-		y: 160
-	},
-	{
-		class: entity,
-		unitName: "PUSHER",
-		x: 560,
-		y: 280
-	},
-	{
-		class: entity,
-		unitName: "CLONER",
-		x: 160,
-		y: 200
-	},
-	{
-		class: entity,
-		unitName: "CLONER",
-		x: 520,
-		y: 280
+		x: 320,
+		y: 360
 	}
 ]
 }
