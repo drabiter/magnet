@@ -37,8 +37,10 @@ public class MenuScreen extends AbstractScreen {
 		
 		fadeIn(1.5f);
 		
-		game.getMusicManager().play(GameMusic.BG01);
-		game.getMusicManager().setVolume(.5f);
+		if (!game.getMusicManager().isPlaying()) {
+			game.getMusicManager().play(GameMusic.BG01);
+			game.getMusicManager().setVolume(.39f);
+		}
 	}
 
 }

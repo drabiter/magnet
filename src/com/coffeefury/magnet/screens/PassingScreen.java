@@ -34,7 +34,7 @@ public class PassingScreen extends AbstractScreen {
 				fadeOut(2f, false);
 			}
 		});
-		table.add(next).center().spaceTop(150);
+		table.add(next).center().spaceTop(50).spaceBottom(50);
 		table.row();
 		
 		Image back = new Image(getTextureRegion("back_l,l"));

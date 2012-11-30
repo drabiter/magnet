@@ -37,12 +37,13 @@ public abstract class AbstractScreen implements Screen {
 	private TextureAtlas atlas;
 	private Table table;
 	
-	protected boolean paused;
+	protected boolean pauseAct;
+	protected boolean stopMusic;
 
 	public AbstractScreen(Magnet game) {
 		this.game = game;
 		this.stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-		this.paused = false;
+		this.pauseAct = false;
 	}
 	
 	public final Stage getStage(){
@@ -116,7 +117,7 @@ public abstract class AbstractScreen implements Screen {
 		// (1) process the game logic
 
 		// update the actors
-		if (!paused) stage.act(delta);
+		if (!pauseAct) stage.act(delta);
 
 		// (2) draw the result
 
@@ -132,12 +133,12 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void pause() {
-		paused = true;
+		pauseAct = true;
 	}
 
 	@Override
 	public void resume() {
-		paused = false;
+		pauseAct = false;
 	}
 
 	@Override
@@ -151,7 +152,8 @@ public abstract class AbstractScreen implements Screen {
 		if (atlas != null)
 			atlas.dispose(); 
 		
-		game.getMusicManager().stop();
+		if (stopMusic)
+			game.getMusicManager().stop();
 	}
 	
 	public void notified(int id){

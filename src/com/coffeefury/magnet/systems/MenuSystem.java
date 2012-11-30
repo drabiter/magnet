@@ -70,18 +70,16 @@ public class MenuSystem extends Group implements System{
 	}
 
 	private void prepareUnitMenu(Unit unit){
-		if (attackMenu == null){
-			attackMenu = new ButtonMenu(screen.getTextureRegion("atk_".concat(unit.type.getTexture())));
-			attackMenu.setClickListener(new ClickListener(){
+		attackMenu = new ButtonMenu(screen.getTextureRegion("atk_".concat(unit.type.getTexture())));
+		attackMenu.setClickListener(new ClickListener(){
 
-				@Override
-				public void click(Actor actor, float x, float y) {
-					// TODO Auto-generated method stub
-					( (FieldSystem) screen.getStage().findActor("fieldsystem")).selectAttackArea(lastUnit);
-				}
-				
-			});
-		}
+			@Override
+			public void click(Actor actor, float x, float y) {
+				// TODO Auto-generated method stub
+				( (FieldSystem) screen.getStage().findActor("fieldsystem")).selectAttackArea(lastUnit);
+			}
+			
+		});
 		
 		if (waitMenu == null){
 			waitMenu = new ButtonMenu(screen.getTextureRegion("wait_l,l"));
@@ -98,7 +96,9 @@ public class MenuSystem extends Group implements System{
 			});
 		}
 		
-		attackMenu.getStyle().up = screen.getNinePatch("atk_".concat(unit.type.getTexture()));
+//		attackMenu.getStyle().up = screen.getNinePatch("atk_".concat(unit.type.getTexture()));
+//		attackMenu.invalidate();
+//		attackMenu.validate();
 		
 		offX = ((unit.x >= Constants.SIZE)? -Constants.SIZE : Constants.SIZE);
 		offY = 0;

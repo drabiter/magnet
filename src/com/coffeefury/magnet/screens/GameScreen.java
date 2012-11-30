@@ -50,7 +50,7 @@ public class GameScreen extends AbstractScreen {
 		
 		unitSystem.create(UtilsBase.loadLevel(Constants.level));
 		
-		fadeIn(1.5f);
+		fadeIn(1f);
 	}
 	
 	Unit lastUnit;
@@ -71,8 +71,6 @@ public class GameScreen extends AbstractScreen {
 	}
 	
 	public void touchUp(int x, int y){
-
-		String stage = "ready ";
 		
 		if (menuSystem.poolMenu(x, y)){
 			menuSystem.clear();
@@ -81,20 +79,14 @@ public class GameScreen extends AbstractScreen {
 		
 		Unit unit = unitSystem.findByLocation(x, y, true, true);
 		
-//		if (unit != null && unit.name.contains(Type.FINISH.toString()))
-//			unit = null;
-		
 		if (unit != null){
-			stage = stage.concat("1");
 			if (lastUnit != null){
 				if (unit.name.equals(lastUnit.name)){
 					//open unit's menu
-					stage = stage.concat(".01");
 					menuSystem.openUnitMenu(lastUnit);
 					fieldSystem.clearArea();
 				}else if (!menuSystem.isOpenMenu() && !fieldSystem.isAttackState()){
 					//change unit focus
-					stage = stage.concat(".02");
 					if (!unit.played && unit.playable) {
 						releaseUnit();
 						selectUnit(unit);
@@ -102,7 +94,6 @@ public class GameScreen extends AbstractScreen {
 				}else if (fieldSystem.isAttackState()){
 					fieldSystem.clearArea();
 					if (fieldSystem.inAttackRadius(lastUnit, unit)){
-						stage = stage.concat(".06");
 						Facing facing = UtilsBase.getFacing(lastUnit, unit);
 						lastUnit.attack(facing);
 						unit.damagedBy(lastUnit, facing);
@@ -111,50 +102,38 @@ public class GameScreen extends AbstractScreen {
 						fieldSystem.clearArea();
 						releaseUnit();
 					}else{
-						stage = stage.concat(".07");
 						menuSystem.openUnitMenu(lastUnit);
 					}
 				}
-				else{
-					stage = stage.concat(".03");
-				}
 			}else{
-				stage = stage.concat(".0a");
 				if (!unit.played){
 					selectUnit(unit);
 				}
 			}
 		}else{
-			stage = stage.concat("2");
 			if (lastUnit != null){
 				if (fieldSystem.isMoveState()){
 					fieldSystem.clearArea();
 					if (fieldSystem.inMoveRadius(lastUnit, x, y)) {
-						stage = stage.concat(".04");
 						float mapX = x - (x % Constants.SIZE);
 						float mapY = (Gdx.graphics.getHeight() - y) - ((Gdx.graphics.getHeight() - y) % Constants.SIZE);
 						lastUnit.move(mapX, mapY);
 						unitSystem.updateUnitPosition(lastUnit.name, mapX, mapY);
-//						menuSystem.openUnitMenu(lastUnit);
 					}else{
-						stage = stage.concat(".05");
 						releaseUnit();
 					}
 				}else if (lastUnit.type == Type.CLONER && fieldSystem.isAttackState() && UnitSystem.getCloneQueue() != null){
 					fieldSystem.clearArea();
 					if (fieldSystem.inAttackRadius(lastUnit, x, y)){
-						stage = stage.concat(".10");
 						unitSystem.createUnit(UnitSystem.getCloneQueue(), x, Gdx.graphics.getHeight() - y);
 						UnitSystem.setCloneQueue(null);
 						lastUnit.played();
 						releaseUnit();
 					}else{
-						stage = stage.concat(".11");
 						menuSystem.openUnitMenu(lastUnit);
 					}
 				}else{
 					if (!lastUnit.played) {
-						stage = stage.concat(".09");
 						lastUnit.undoMove();
 						unitSystem.updateUnitPosition(lastUnit);
 						menuSystem.clear();
@@ -165,16 +144,12 @@ public class GameScreen extends AbstractScreen {
 				}
 			}else{
 				if (menuSystem.isOpenMenu()){
-					stage = stage.concat(".0b");
 					menuSystem.clear();
 				}else{
-					stage = stage.concat(".0c");
 					menuSystem.openMenu(x, y);
 				}
 			}
 		}
-		
-		Gdx.app.log(null, stage);
 		
 		if (unitSystem.checkWin()){
 			inputSystem.enabled = false;

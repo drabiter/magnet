@@ -81,7 +81,7 @@ public class FieldSystem extends Group implements System{
 		dx -= (int) (x / Constants.SIZE);
 		int dy = (int) (unit.y / Constants.SIZE);
 		dy -= (int) (Gdx.graphics.getHeight() - y) / Constants.SIZE;
-		Gdx.app.log("move", dx+" "+dy);
+//		Gdx.app.log("move", dx+" "+dy);
 		return (Math.abs(dx) + Math.abs(dy)) <= Constants.MOVE_RANGE[unit.type.ordinal()];
 	}
 	

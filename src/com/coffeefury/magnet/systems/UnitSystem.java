@@ -120,30 +120,30 @@ public class UnitSystem extends Group implements System {
 		float sy = facing.yd * Constants.SIZE;
 		float px = lastUnit.x + (sx * lastUnit.HIT);
 		float py = lastUnit.y + (sy * lastUnit.HIT);
-		Gdx.app.log("s p", sx + " " + sy + " " + px + " " + py);
-		Gdx.app.log("l u", lastUnit.x + " " + lastUnit.y + " " + unit.x + " "
-				+ unit.y);
+//		Gdx.app.log("s p", sx + " " + sy + " " + px + " " + py);
+//		Gdx.app.log("l u", lastUnit.x + " " + lastUnit.y + " " + unit.x + " "
+//				+ unit.y);
 		while (unit.x != px || unit.y != py) {
 			Unit existed = findByLocation(unit.x + sx * direction,
 					Gdx.graphics.getHeight() - ((unit.y + sy * direction)));
-			Gdx.app.log("look up", (unit.x + sx * direction) + " "
-					+ (Gdx.graphics.getHeight() - (unit.y + sy * direction)));
+//			Gdx.app.log("look up", (unit.x + sx * direction) + " "
+//					+ (Gdx.graphics.getHeight() - (unit.y + sy * direction)));
 			if (existed == null) {
 				unit.x += sx * direction;
 				unit.y += sy * direction;
-				Gdx.app.log("new pos", unit.x + " " + unit.y);
+//				Gdx.app.log("new pos", unit.x + " " + unit.y);
 			}else if (existed != null && !existed.playable && !unit.playable){
 				unit.x += sx * direction;
 				unit.y += sy * direction;
 				break;
 			}else{
-				Gdx.app.log("exist", existed.name);
+//				Gdx.app.log("exist", existed.name);
 				break;
 			}
 		}
 		updateUnitPosition(unit);
 		unit.shake();
-		Gdx.app.log(unit.name, unit.x + " " + unit.y);
+//		Gdx.app.log(unit.name, unit.x + " " + unit.y);
 	}
 
 	/**

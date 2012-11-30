@@ -62,6 +62,14 @@ public class MusicManager implements Disposable {
 		musicBeingPlayed.setLooping(true);
 		musicBeingPlayed.play();
 	}
+	
+	/**
+	 * @return whether a music is being played
+	 */
+	public boolean isPlaying() {
+		// TODO Auto-generated method stub
+		return musicBeingPlayed != null;
+	}
 
 	/**
 	 * Stops and disposes the current music being played, if any.
