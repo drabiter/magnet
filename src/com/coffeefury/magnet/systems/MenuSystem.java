@@ -111,7 +111,7 @@ public class MenuSystem extends Group implements System{
 	private void prepareMenu(int x, int y) {
 		// TODO Auto-generated method stub
 		if (restartMenu == null){
-			restartMenu = new ButtonMenu(screen.getTextureRegion("wait_all_l,l"));
+			restartMenu = new ButtonMenu(screen.getTextureRegion("restart_l,l"));
 			restartMenu.setClickListener(new ClickListener() {
 				
 				@Override
