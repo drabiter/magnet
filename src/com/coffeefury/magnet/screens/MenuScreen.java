@@ -40,8 +40,9 @@ public class MenuScreen extends AbstractScreen {
 		
 		Table table = getTable().bottom().height(25);
 		table.add("Programmer : @drabiter").expandX();
-		table.add("Art : @g4ronk").expandX();
+		table.add("Media & Levels : @g4ronk").expandX();
 		table.add("Contributor : @namrog84").expandX();
+		table.add("BGM credit : Kamihamiha").expandX();
 		
 		fadeIn(1.5f);
 		

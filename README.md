@@ -24,5 +24,6 @@ Manipulate positions of raw N & S pole materials with Absorbnetors and Invertnet
 <br/?
 ##Credits##
 **Hendra "[drabiter](http://drabiter.com/)"** - programmer.<br/>
-**Annas "[G4ronk](http://coffeefury.com/)"** - Art & levels design.<br/>
-**[Namrog84](http://www.newrog.com/)** - Contributor.
+**Annas "[G4ronk](http://coffeefury.com/)"** - Media & levels design.<br/>
+**[Namrog84](http://www.newrog.com/)** - Contributor.<br/>
+BGM credit to : [Kamihamiha](http://ccmixter.org/people/Kamihamiha).
