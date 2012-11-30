@@ -178,8 +178,9 @@ public class UnitSystem extends Group implements System {
 				allPlayed = allPlayed && unit.played;
 		}
 		if (allPlayed) {
-			((HUDSystem) screen.getStage().findActor("hudsystem"))
-					.showTurnNotif();
+//			((HUDSystem) screen.getStage().findActor("hudsystem"))
+//					.showTurnNotif();
+			resetPlayableUnits();
 		}
 	}
 
@@ -191,7 +192,8 @@ public class UnitSystem extends Group implements System {
 			if (unit.playable)
 				unit.played();
 		}
-		((HUDSystem) screen.getStage().findActor("hudsystem")).showTurnNotif();
+//		((HUDSystem) screen.getStage().findActor("hudsystem")).showTurnNotif();
+		resetPlayableUnits();
 	}
 
 	public void create(Level level) {

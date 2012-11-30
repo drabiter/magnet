@@ -26,7 +26,7 @@ public class MovingLabel extends Label {
 			public void completed(Action action) {
 				// TODO Auto-generated method stub
 				markToRemove(true);
-				hudSystem.resetTurn();
+//				hudSystem.resetTurn();
 			}
 			
 		}));

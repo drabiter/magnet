@@ -30,9 +30,8 @@ public class LevelScreen extends AbstractScreen {
 		int lvlNum = Constants.TOTAL_LEVEL;
 
 		for (int i = 1; i <= lvlNum; i++) {
-			if (i > ROW) table.row();
-			String name = String.valueOf(i);
-			Image lvl = new Image(getTextureRegion("lv_".concat(name).concat("_l,l")), Scaling.stretch, Align.CENTER, name);
+			String lvlName = String.valueOf(i);
+			Image lvl = new Image(getTextureRegion("lv_".concat(lvlName).concat("_l,l")), Scaling.stretch, Align.CENTER, lvlName);
 			lvl.setClickListener(new ClickListener() {
 
 				@Override
@@ -42,7 +41,8 @@ public class LevelScreen extends AbstractScreen {
 					fadeOut(2f, false);
 				}
 			});
-			table.add(lvl).pad(10);
+			table.add(lvl).pad(7);
+			if (i % ROW == 0) table.row();
 		}
 		Image back = new Image(getTextureRegion("back_l,l"));
 		back.setClickListener(new ClickListener() {
@@ -54,7 +54,7 @@ public class LevelScreen extends AbstractScreen {
 			}
 		});
 		table.row();
-		table.add(back).pad(20).spaceBottom(100).colspan(lvlNum);
+		table.add(back).pad(16).spaceBottom(10).colspan(lvlNum);
 
 		fadeIn(1.5f);
 	}

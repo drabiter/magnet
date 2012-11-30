@@ -3,8 +3,6 @@ package com.coffeefury.magnet.systems;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.coffeefury.magnet.components.MovingLabel;
 import com.coffeefury.magnet.screens.AbstractScreen;
 import com.coffeefury.magnet.utils.Constants;
 
@@ -14,23 +12,18 @@ public class HUDSystem extends Group implements System {
 
 	AbstractScreen screen;
 	
-	Label turnCount;
 	Image cloneIcon;
-	
-	Image turn;
 	Image clone;
+	Image level;
 	
-	public int numOfTurn;
+//	public int numOfTurn;
 
 	public HUDSystem(AbstractScreen screen) {
 		super("hudsystem");
 		this.screen = screen;
 		
-		turn = new Image(screen.getTextureRegion("turns_l,l"));
-		turnCount = new Label(String.valueOf(numOfTurn), screen.getSkin());
-		turnCount.x = turn.x + turn.getPrefWidth() + 10;
-		turnCount.y = turn.y = Gdx.graphics.getHeight() - turn.getPrefHeight();
-		turnCount.getStyle().font.setScale(turn.getPrefHeight() / turnCount.getPrefHeight());
+		level = new Image(screen.getTextureRegion("lv_".concat(String.valueOf(Constants.level)).concat("_l,l")));
+		level.y = Gdx.graphics.getHeight() - level.getPrefHeight();
 		
 		clone = new Image(screen.getTextureRegion("nextclone_l,l"));
 		clone.x = Gdx.graphics.getWidth() - (clone.getPrefWidth() + Constants.SIZE + 10);
@@ -41,9 +34,8 @@ public class HUDSystem extends Group implements System {
 		
 		color.a = ALPHA;
 
-		this.addActor(turnCount);
+		this.addActor(level);
 		this.addActor(cloneIcon);
-		this.addActor(turn);
 		this.addActor(clone);
 	}
 
@@ -58,24 +50,24 @@ public class HUDSystem extends Group implements System {
 		}
 	}
 
-	MovingLabel turnNotif;
+//	MovingLabel turnNotif;
 	
-	public void showTurnNotif(){
-		turnNotif = new MovingLabel(this, "TURN ".concat(String.valueOf(numOfTurn)), screen.getSkin());
-		turnNotif.getStyle().font.scale(.75f);
-		this.addActor(turnNotif);
-		
-		updateTurn();
-	}
+//	public void showTurnNotif(){
+//		turnNotif = new MovingLabel(this, "TURN ".concat(String.valueOf(numOfTurn)), screen.getSkin());
+//		turnNotif.getStyle().font.scale(.75f);
+//		this.addActor(turnNotif);
+//		
+//		updateTurn();
+//	}
 	
-	public void updateTurn() {
-		// TODO Auto-generated method stub
-		numOfTurn++;
-		turnCount.setText(String.valueOf(numOfTurn));
-		turnCount.getStyle().font.setScale(turn.getPrefHeight() / turnCount.getPrefHeight());
-	}
+//	public void updateTurn() {
+//		// TODO Auto-generated method stub
+//		numOfTurn++;
+//		turnCount.setText(String.valueOf(numOfTurn));
+//		turnCount.getStyle().font.setScale(turn.getPrefHeight() / turnCount.getPrefHeight());
+//	}
 
-	public void resetTurn(){
-		((UnitSystem) screen.getStage().findActor("unitsystem")).resetPlayableUnits();
-	}
+//	public void resetTurn(){
+//		((UnitSystem) screen.getStage().findActor("unitsystem")).resetPlayableUnits();
+//	}
 }
