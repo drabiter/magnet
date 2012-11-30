@@ -15,8 +15,6 @@ public class HUDSystem extends Group implements System {
 	Image cloneIcon;
 	Image clone;
 	Image level;
-	
-//	public int numOfTurn;
 
 	public HUDSystem(AbstractScreen screen) {
 		super("hudsystem");
@@ -49,25 +47,4 @@ public class HUDSystem extends Group implements System {
 			cloneIcon.setRegion(null);
 		}
 	}
-
-//	MovingLabel turnNotif;
-	
-//	public void showTurnNotif(){
-//		turnNotif = new MovingLabel(this, "TURN ".concat(String.valueOf(numOfTurn)), screen.getSkin());
-//		turnNotif.getStyle().font.scale(.75f);
-//		this.addActor(turnNotif);
-//		
-//		updateTurn();
-//	}
-	
-//	public void updateTurn() {
-//		// TODO Auto-generated method stub
-//		numOfTurn++;
-//		turnCount.setText(String.valueOf(numOfTurn));
-//		turnCount.getStyle().font.setScale(turn.getPrefHeight() / turnCount.getPrefHeight());
-//	}
-
-//	public void resetTurn(){
-//		((UnitSystem) screen.getStage().findActor("unitsystem")).resetPlayableUnits();
-//	}
 }

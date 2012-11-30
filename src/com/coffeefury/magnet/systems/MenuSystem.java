@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.coffeefury.magnet.components.Unit;
 import com.coffeefury.magnet.screens.AbstractScreen;
+import com.coffeefury.magnet.screens.GameScreen;
 import com.coffeefury.magnet.utils.Constants;
+import com.coffeefury.magnet.utils.UtilsBase;
 
 public class MenuSystem extends Group implements System{
 	
@@ -23,7 +25,7 @@ public class MenuSystem extends Group implements System{
 	ButtonMenu attackMenu;
 	ButtonMenu waitMenu;
 	
-	ButtonMenu waitAllMenu;
+	ButtonMenu restartMenu;
 	ButtonMenu backToLevel;
 	
 	Unit lastUnit = null;
@@ -44,7 +46,7 @@ public class MenuSystem extends Group implements System{
 	public void openMenu(int x, int y){
 		prepareMenu(x, y);
 		
-		this.addActor(waitAllMenu);
+		this.addActor(restartMenu);
 		this.addActor(backToLevel);
 	}
 
@@ -91,14 +93,12 @@ public class MenuSystem extends Group implements System{
 					if (lastUnit != null){
 						lastUnit.played();
 					}
-					((UnitSystem) screen.getStage().findActor("unitsystem")).isPlayableUnitsDone();
+					if (((UnitSystem) screen.getStage().findActor("unitsystem")).isPlayableUnitsDone()){
+						screen.notified(GameScreen.PLAYED);
+					}
 				}
 			});
 		}
-		
-//		attackMenu.getStyle().up = screen.getNinePatch("atk_".concat(unit.type.getTexture()));
-//		attackMenu.invalidate();
-//		attackMenu.validate();
 		
 		offX = ((unit.x >= Constants.SIZE)? -Constants.SIZE : Constants.SIZE);
 		offY = 0;
@@ -110,14 +110,14 @@ public class MenuSystem extends Group implements System{
 	
 	private void prepareMenu(int x, int y) {
 		// TODO Auto-generated method stub
-		if (waitAllMenu == null){
-			waitAllMenu = new ButtonMenu(screen.getTextureRegion("wait_all_l,l"));
-			waitAllMenu.setClickListener(new ClickListener() {
+		if (restartMenu == null){
+			restartMenu = new ButtonMenu(screen.getTextureRegion("wait_all_l,l"));
+			restartMenu.setClickListener(new ClickListener() {
 				
 				@Override
 				public void click(Actor actor, float x, float y) {
 					// TODO Auto-generated method stub
-					((UnitSystem) screen.getStage().findActor("unitsystem")).playedAll();
+					((UnitSystem) screen.getStage().findActor("unitsystem")).create(UtilsBase.loadLevel(Constants.level));
 				}
 			});
 		}
@@ -135,8 +135,8 @@ public class MenuSystem extends Group implements System{
 		}
 		
 		float offset = Constants.SIZE * .5f; 
-		waitAllMenu.setPos(x, Gdx.graphics.getHeight() - y, offset, offset);
-		waitAllMenu.moveable = false;
+		restartMenu.setPos(x, Gdx.graphics.getHeight() - y, offset, offset);
+		restartMenu.moveable = false;
 		backToLevel.setPos(x - Constants.SIZE, Gdx.graphics.getHeight() - y, -offset, offset);
 		backToLevel.moveable = false;
 	}

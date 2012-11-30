@@ -6,8 +6,9 @@ import com.coffeefury.magnet.audio.MusicManager;
 import com.coffeefury.magnet.audio.SoundManager;
 import com.coffeefury.magnet.screens.GameScreen;
 import com.coffeefury.magnet.screens.LevelScreen;
+import com.coffeefury.magnet.screens.LosingScreen;
 import com.coffeefury.magnet.screens.MenuScreen;
-import com.coffeefury.magnet.screens.PassingScreen;
+import com.coffeefury.magnet.screens.WinningScreen;
 
 public class Magnet extends Game {
 	
@@ -65,9 +66,9 @@ public class Magnet extends Game {
 		return musicManager;
 	}
 
-	public PassingScreen getPassingScreen() {
+	public WinningScreen getPassingScreen() {
 		// TODO Auto-generated method stub
-		return new PassingScreen(this);
+		return new WinningScreen(this);
 	}
 	
 	public LevelScreen getLevelScreen() {
@@ -78,6 +79,10 @@ public class Magnet extends Game {
 	public MenuScreen getMenuScreen() {
 		// TODO Auto-generated method stub
 		return new MenuScreen(this);
+	}
+	
+	public LosingScreen getLosingScreen(){
+		return new LosingScreen(this);
 	}
 	
 }

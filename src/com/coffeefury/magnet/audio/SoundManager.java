@@ -17,12 +17,12 @@ public class SoundManager implements
 	 * The available sound files.
 	 */
 	public enum GameSound {
-		ATKHITV("sfx/atkhit_01.mp3"),
-		ATKHITH("sfx/atkhit_02.mp3"),
-		ATKHITD("sfx/atkhit_03.mp3"),
-		ATKMISSV("sfx/atkmiss_01.mp3"),
-		ATKMISSH("sfx/atkmiss_02.mp3"),
-		ATKMISSD("sfx/atkmiss_03.mp3"),
+		CANCEL("sounds/cancel.wav"),
+		CLONE_START("sounds/clone_start.wav"),
+		CLONE_FINISH("sounds/clone_finish.wav"),
+		CONFIRM("sounds/confirm.wav"),
+		SELECT("sounds/select.wav"),
+		THROWPULL("sounds/throwpull.wav"),
 		;
 
 		private final String fileName;

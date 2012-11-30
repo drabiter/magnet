@@ -162,13 +162,13 @@ public class UnitSystem extends Group implements System {
 		v.y = Gdx.graphics.getHeight() - y;
 	}
 
-	public void resetPlayableUnits() {
-		for (int i = 0; i < immutableChildren.size(); i++) {
-			((Unit) immutableChildren.get(i)).reset();
-		}
-	}
+//	public void resetPlayableUnits() {
+//		for (int i = 0; i < immutableChildren.size(); i++) {
+//			((Unit) immutableChildren.get(i)).reset();
+//		}
+//	}
 
-	public void isPlayableUnitsDone() {
+	public boolean isPlayableUnitsDone() {
 		// TODO Auto-generated method stub
 		boolean allPlayed = true;
 		Unit unit;
@@ -177,27 +177,23 @@ public class UnitSystem extends Group implements System {
 			if (unit.playable)
 				allPlayed = allPlayed && unit.played;
 		}
-		if (allPlayed) {
-//			((HUDSystem) screen.getStage().findActor("hudsystem"))
-//					.showTurnNotif();
-			resetPlayableUnits();
-		}
+		return allPlayed;
 	}
 
-	public void playedAll() {
-		// TODO Auto-generated method stub
-		Unit unit;
-		for (int i = 0; i < immutableChildren.size(); i++) {
-			unit = ((Unit) immutableChildren.get(i));
-			if (unit.playable)
-				unit.played();
-		}
-//		((HUDSystem) screen.getStage().findActor("hudsystem")).showTurnNotif();
-		resetPlayableUnits();
-	}
+//	public void playedAll() {
+//		// TODO Auto-generated method stub
+//		Unit unit;
+//		for (int i = 0; i < immutableChildren.size(); i++) {
+//			unit = ((Unit) immutableChildren.get(i));
+//			if (unit.playable)
+//				unit.played();
+//		}
+//		screen.notified(GameScreen.LOSE);
+//	}
 
 	public void create(Level level) {
 		// TODO Auto-generated method stub
+		clear();
 		Entity e;
 		for (Object o : level.getEntities()) {
 			e = (Entity) o;

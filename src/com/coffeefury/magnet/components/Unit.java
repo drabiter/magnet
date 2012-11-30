@@ -105,14 +105,7 @@ public class Unit extends Image {
 
 	public void damagedBy(Unit lastUnit, Facing facing) {
 		// TODO Auto-generated method stub
-		if (lastUnit.getAtkType() == AttackType.FIELDER) {
-			// this.x = lastUnit.x + (facing.xd * lastUnit.HIT *
-			// Constants.SIZE);
-			// this.y = lastUnit.y + (facing.yd * lastUnit.HIT *
-			// Constants.SIZE);
-			// normalizePos();
-//			shake();
-		} else if (lastUnit.getAtkType() == AttackType.CLONE) {
+		if (lastUnit.getAtkType() == AttackType.CLONE) {
 			if (type != Type.FINISH && type != Type.SHEEP)
 				UnitSystem.setCloneQueue(type);
 		}

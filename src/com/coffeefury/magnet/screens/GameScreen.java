@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.coffeefury.magnet.Magnet;
+import com.coffeefury.magnet.audio.SoundManager.GameSound;
 import com.coffeefury.magnet.components.Unit;
 import com.coffeefury.magnet.systems.FieldSystem;
 import com.coffeefury.magnet.systems.GameInputSystem;
@@ -19,10 +20,15 @@ import com.coffeefury.magnet.utils.UtilsBase.Facing;
 
 public class GameScreen extends AbstractScreen {
 
+	private static final int BACK = 0;
+	public static final int PLAYED = 1;
+
 	FieldSystem fieldSystem;
 	HUDSystem hudSystem;
 	MenuSystem menuSystem;
 	UnitSystem unitSystem;
+
+	private boolean allPlayed;
 
 	public GameScreen(Magnet game) {
 		super(game);
@@ -50,6 +56,8 @@ public class GameScreen extends AbstractScreen {
 
 		unitSystem.create(UtilsBase.loadLevel(Constants.level));
 
+		allPlayed = false;
+
 		fadeIn(1f);
 	}
 
@@ -68,11 +76,10 @@ public class GameScreen extends AbstractScreen {
 		lastUnit.flash();
 		fieldSystem.selectMoveArea(lastUnit);
 		menuSystem.clear();
+		game.getSoundManager().play(GameSound.SELECT);
 	}
 
 	public void touchUp(int x, int y) {
-		
-		String stage = "";
 
 		if (menuSystem.poolMenu(x, y)) {
 			menuSystem.clear();
@@ -82,17 +89,14 @@ public class GameScreen extends AbstractScreen {
 		Unit unit = unitSystem.findByLocation(x, y, true, true);
 
 		if (unit != null) {
-			stage = stage.concat("1");
 			if (lastUnit != null) {
 				if (unit.name.equals(lastUnit.name)) {
 					// open unit's menu
-					stage = stage.concat(".01");
 					menuSystem.openUnitMenu(lastUnit);
 					fieldSystem.clearArea();
 				} else if (!menuSystem.isOpenMenu()
 						&& !fieldSystem.isAttackState()) {
 					// change unit focus
-					stage = stage.concat(".02");
 					if (!unit.played && unit.playable) {
 						releaseUnit();
 						selectUnit(unit);
@@ -100,162 +104,85 @@ public class GameScreen extends AbstractScreen {
 				} else if (fieldSystem.isAttackState()) {
 					fieldSystem.clearArea();
 					if (fieldSystem.inAttackRadius(lastUnit, unit)) {
-						stage = stage.concat(".06");
 						Facing facing = UtilsBase.getFacing(lastUnit, unit);
 						lastUnit.attack(facing);
 						unit.damagedBy(lastUnit, facing);
 						unitSystem.adjustUnitPosition(lastUnit, unit, facing);
-						unitSystem.isPlayableUnitsDone();
 						fieldSystem.clearArea();
+						game.getSoundManager()
+								.play((lastUnit.type == Type.CLONER) ? GameSound.CLONE_START
+										: GameSound.THROWPULL);
 						releaseUnit();
+						if (unitSystem.isPlayableUnitsDone())
+							this.notified(GameScreen.PLAYED);
 					} else {
-						stage = stage.concat(".07");
 						menuSystem.openUnitMenu(lastUnit);
 					}
-				} else {
-					stage = stage.concat(".03");
 				}
 			} else {
-				stage = stage.concat(".0a");
 				if (!unit.played) {
 					selectUnit(unit);
 				}
 			}
 		} else {
-			stage = stage.concat("2");
 			if (lastUnit != null) {
 				if (fieldSystem.isMoveState()) {
 					fieldSystem.clearArea();
 					if (fieldSystem.inMoveRadius(lastUnit, x, y)) {
-						stage = stage.concat(".04");
 						float mapX = x - (x % Constants.SIZE);
 						float mapY = (Gdx.graphics.getHeight() - y)
 								- ((Gdx.graphics.getHeight() - y) % Constants.SIZE);
 						lastUnit.move(mapX, mapY);
 						unitSystem
 								.updateUnitPosition(lastUnit.name, mapX, mapY);
-						// menuSystem.openUnitMenu(lastUnit);
 					} else {
-						stage = stage.concat(".05");
 						releaseUnit();
+						game.getSoundManager().play(GameSound.CANCEL);
 					}
 				} else if (lastUnit.type == Type.CLONER
 						&& fieldSystem.isAttackState()
 						&& UnitSystem.getCloneQueue() != null) {
 					fieldSystem.clearArea();
 					if (fieldSystem.inAttackRadius(lastUnit, x, y)) {
-						stage = stage.concat(".10");
 						unitSystem.createUnit(UnitSystem.getCloneQueue(), x,
 								Gdx.graphics.getHeight() - y);
 						UnitSystem.setCloneQueue(null);
 						lastUnit.played();
 						releaseUnit();
+						game.getSoundManager().play(GameSound.CLONE_FINISH);
 					} else {
-						stage = stage.concat(".11");
 						menuSystem.openUnitMenu(lastUnit);
+						game.getSoundManager().play(GameSound.CANCEL);
 					}
 				} else {
 					if (!lastUnit.played) {
-						stage = stage.concat(".09");
 						lastUnit.undoMove();
 						unitSystem.updateUnitPosition(lastUnit);
 						menuSystem.clear();
 						fieldSystem.selectMoveArea(lastUnit);
+						game.getSoundManager().play(GameSound.CANCEL);
 					} else {
 						releaseUnit();
+						game.getSoundManager().play(GameSound.CANCEL);
 					}
 				}
 			} else {
 				if (menuSystem.isOpenMenu()) {
-					stage = stage.concat(".0b");
 					menuSystem.clear();
+					game.getSoundManager().play(GameSound.CANCEL);
 				} else {
-					stage = stage.concat(".0c");
 					menuSystem.openMenu(x, y);
 				}
 			}
 		}
 
-		Gdx.app.log(null, stage);
-
-		// if (unit != null){
-		// if (lastUnit != null){
-		// if (unit.name.equals(lastUnit.name)){
-		// //open unit's menu
-		// menuSystem.openUnitMenu(lastUnit);
-		// fieldSystem.clearArea();
-		// }else if (!menuSystem.isOpenMenu() && !fieldSystem.isAttackState()){
-		// //change unit focus
-		// if (!unit.played && unit.playable) {
-		// releaseUnit();
-		// selectUnit(unit);
-		// }
-		// }else if (fieldSystem.isAttackState()){
-		// fieldSystem.clearArea();
-		// if (fieldSystem.inAttackRadius(lastUnit, unit)){
-		// Facing facing = UtilsBase.getFacing(lastUnit, unit);
-		// lastUnit.attack(facing);
-		// unit.damagedBy(lastUnit, facing);
-		// unitSystem.adjustUnitPosition(lastUnit, unit, facing);
-		// unitSystem.isPlayableUnitsDone();
-		// fieldSystem.clearArea();
-		// releaseUnit();
-		// }else{
-		// menuSystem.openUnitMenu(lastUnit);
-		// }
-		// }
-		// }else{
-		// if (!unit.played){
-		// selectUnit(unit);
-		// }
-		// }
-		// }else{
-		// if (lastUnit != null){
-		// if (fieldSystem.isMoveState()){
-		// fieldSystem.clearArea();
-		// if (fieldSystem.inMoveRadius(lastUnit, x, y)) {
-		// float mapX = x - (x % Constants.SIZE);
-		// float mapY = (Gdx.graphics.getHeight() - y) -
-		// ((Gdx.graphics.getHeight() - y) % Constants.SIZE);
-		// lastUnit.move(mapX, mapY);
-		// unitSystem.updateUnitPosition(lastUnit.name, mapX, mapY);
-		// }else{
-		// releaseUnit();
-		// }
-		// }else if (lastUnit.type == Type.CLONER && fieldSystem.isAttackState()
-		// && UnitSystem.getCloneQueue() != null){
-		// fieldSystem.clearArea();
-		// if (fieldSystem.inAttackRadius(lastUnit, x, y)){
-		// unitSystem.createUnit(UnitSystem.getCloneQueue(), x,
-		// Gdx.graphics.getHeight() - y);
-		// UnitSystem.setCloneQueue(null);
-		// lastUnit.played();
-		// releaseUnit();
-		// }else{
-		// menuSystem.openUnitMenu(lastUnit);
-		// }
-		// }else{
-		// if (!lastUnit.played) {
-		// lastUnit.undoMove();
-		// unitSystem.updateUnitPosition(lastUnit);
-		// menuSystem.clear();
-		// fieldSystem.selectMoveArea(lastUnit);
-		// }else{
-		// releaseUnit();
-		// }
-		// }
-		// }else{
-		// if (menuSystem.isOpenMenu()){
-		// menuSystem.clear();
-		// }else{
-		// menuSystem.openMenu(x, y);
-		// }
-		// }
-		// }
+		// Gdx.app.log(null, stage);
 
 		if (unitSystem.checkWin()) {
 			inputSystem.enabled = false;
 			fadeOut(2f, false);
+		} else if (allPlayed) {
+			game.setScreen(game.getLosingScreen());
 		}
 	}
 
@@ -291,7 +218,7 @@ public class GameScreen extends AbstractScreen {
 	@Override
 	public void notified(int id) {
 		// TODO Auto-generated method stub
-		if (id == 0) {
+		if (id == BACK) {
 			stage.getRoot().action(
 					FadeOut.$(2f).setCompletionListener(
 							new OnActionCompleted() {
@@ -302,6 +229,8 @@ public class GameScreen extends AbstractScreen {
 									game.setScreen(game.getLevelScreen());
 								}
 							}));
+		} else if (id == PLAYED) {
+			allPlayed = true;
 		}
 	}
 }

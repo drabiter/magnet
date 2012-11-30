@@ -5,10 +5,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.coffeefury.magnet.Magnet;
+import com.coffeefury.magnet.audio.SoundManager.GameSound;
 
-public class PassingScreen extends AbstractScreen {
+public class LosingScreen extends AbstractScreen {
 
-	public PassingScreen(Magnet game) {
+	public LosingScreen(Magnet game) {
 		super(game);
 		// TODO Auto-generated constructor stub
 	}
@@ -22,19 +23,7 @@ public class PassingScreen extends AbstractScreen {
 		
 		Table table = getTable();
 		
-		table.add(new Image(getTextureRegion("win_l,l")));
-		table.row();
-
-		Image next = new Image(getTextureRegion("next_l,l"));
-		next.setClickListener(new ClickListener() {
-
-			@Override
-			public void click(Actor actor, float x, float y) {
-				// TODO Auto-generated method stub
-				fadeOut(2f, false);
-			}
-		});
-		table.add(next).center().spaceTop(50).spaceBottom(50);
+		table.add(new Image(getTextureRegion("lose_l,l")));
 		table.row();
 		
 		Image back = new Image(getTextureRegion("back_l,l"));
@@ -43,10 +32,11 @@ public class PassingScreen extends AbstractScreen {
 			@Override
 			public void click(Actor actor, float x, float y) {
 				// TODO Auto-generated method stub
+				game.getSoundManager().play(GameSound.CONFIRM);
 				game.setScreen(game.getMenuScreen());
 			}
 		});
-		table.add(back).center();
+		table.add(back).center().spaceTop(50);
 		
 		fadeIn(1.5f);
 	}

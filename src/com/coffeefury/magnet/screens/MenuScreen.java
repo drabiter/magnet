@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.coffeefury.magnet.Magnet;
 import com.coffeefury.magnet.audio.MusicManager.GameMusic;
+import com.coffeefury.magnet.audio.SoundManager.GameSound;
 
 public class MenuScreen extends AbstractScreen {
 
@@ -30,10 +32,16 @@ public class MenuScreen extends AbstractScreen {
 			@Override
 			public void click(Actor actor, float x, float y) {
 				// TODO Auto-generated method stub
+				game.getSoundManager().play(GameSound.CONFIRM);
 				game.setScreen(game.getLevelScreen());
 			}
 		});
 		getStage().addActor(play);
+		
+		Table table = getTable().bottom().height(25);
+		table.add("Programmer : @drabiter").expandX();
+		table.add("Art : @g4ronk").expandX();
+		table.add("Contributor : @namrog84").expandX();
 		
 		fadeIn(1.5f);
 		

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.coffeefury.magnet.Magnet;
+import com.coffeefury.magnet.audio.SoundManager.GameSound;
 import com.coffeefury.magnet.utils.Constants;
 
 public class LevelScreen extends AbstractScreen {
@@ -37,6 +38,7 @@ public class LevelScreen extends AbstractScreen {
 				@Override
 				public void click(Actor actor, float x, float y) {
 					// TODO Auto-generated method stub
+					game.getSoundManager().play(GameSound.CONFIRM);
 					Constants.level = Integer.parseInt(actor.name);
 					fadeOut(2f, false);
 				}
@@ -50,6 +52,7 @@ public class LevelScreen extends AbstractScreen {
 			@Override
 			public void click(Actor actor, float x, float y) {
 				// TODO Auto-generated method stub
+				game.getSoundManager().play(GameSound.CONFIRM);
 				game.setScreen(game.getMenuScreen());
 			}
 		});
