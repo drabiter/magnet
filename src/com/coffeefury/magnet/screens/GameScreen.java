@@ -18,7 +18,7 @@ import com.coffeefury.magnet.utils.UtilsBase;
 import com.coffeefury.magnet.utils.UtilsBase.Facing;
 
 public class GameScreen extends AbstractScreen {
-	
+
 	FieldSystem fieldSystem;
 	HUDSystem hudSystem;
 	MenuSystem menuSystem;
@@ -35,125 +35,225 @@ public class GameScreen extends AbstractScreen {
 		// TODO Auto-generated method stub
 		super.show();
 		Gdx.input.setInputProcessor(inputSystem);
-		
+
 		fieldSystem = new FieldSystem(this);
 		hudSystem = new HUDSystem(this);
 		menuSystem = new MenuSystem(this);
 		unitSystem = new UnitSystem(this);
-		
+
 		stage.addActor(new Image(getTextureRegion("background_l,l")));
-		
+
 		stage.addActor(fieldSystem);
 		stage.addActor(unitSystem);
 		stage.addActor(menuSystem);
 		stage.addActor(hudSystem);
-		
+
 		unitSystem.create(UtilsBase.loadLevel(Constants.level));
-		
+
 		fadeIn(1f);
 	}
-	
+
 	Unit lastUnit;
-	
-	private void releaseUnit(){
-		if (lastUnit != null){
+
+	private void releaseUnit() {
+		if (lastUnit != null) {
 			lastUnit.release();
 			lastUnit = null;
 		}
 		fieldSystem.clearArea();
 	}
-	
-	private void selectUnit(Unit unit){
+
+	private void selectUnit(Unit unit) {
 		lastUnit = unit;
 		lastUnit.flash();
 		fieldSystem.selectMoveArea(lastUnit);
 		menuSystem.clear();
 	}
-	
-	public void touchUp(int x, int y){
+
+	public void touchUp(int x, int y) {
 		
-		if (menuSystem.poolMenu(x, y)){
+		String stage = "";
+
+		if (menuSystem.poolMenu(x, y)) {
 			menuSystem.clear();
 			return;
 		}
-		
+
 		Unit unit = unitSystem.findByLocation(x, y, true, true);
-		
-		
-		
-//		if (unit != null){
-//			if (lastUnit != null){
-//				if (unit.name.equals(lastUnit.name)){
-//					//open unit's menu
-//					menuSystem.openUnitMenu(lastUnit);
-//					fieldSystem.clearArea();
-//				}else if (!menuSystem.isOpenMenu() && !fieldSystem.isAttackState()){
-//					//change unit focus
-//					if (!unit.played && unit.playable) {
-//						releaseUnit();
-//						selectUnit(unit);
-//					}
-//				}else if (fieldSystem.isAttackState()){
-//					fieldSystem.clearArea();
-//					if (fieldSystem.inAttackRadius(lastUnit, unit)){
-//						Facing facing = UtilsBase.getFacing(lastUnit, unit);
-//						lastUnit.attack(facing);
-//						unit.damagedBy(lastUnit, facing);
-//						unitSystem.adjustUnitPosition(lastUnit, unit, facing);
-//						unitSystem.isPlayableUnitsDone();
-//						fieldSystem.clearArea();
-//						releaseUnit();
-//					}else{
-//						menuSystem.openUnitMenu(lastUnit);
-//					}
-//				}
-//			}else{
-//				if (!unit.played){
-//					selectUnit(unit);
-//				}
-//			}
-//		}else{
-//			if (lastUnit != null){
-//				if (fieldSystem.isMoveState()){
-//					fieldSystem.clearArea();
-//					if (fieldSystem.inMoveRadius(lastUnit, x, y)) {
-//						float mapX = x - (x % Constants.SIZE);
-//						float mapY = (Gdx.graphics.getHeight() - y) - ((Gdx.graphics.getHeight() - y) % Constants.SIZE);
-//						lastUnit.move(mapX, mapY);
-//						unitSystem.updateUnitPosition(lastUnit.name, mapX, mapY);
-//					}else{
-//						releaseUnit();
-//					}
-//				}else if (lastUnit.type == Type.CLONER && fieldSystem.isAttackState() && UnitSystem.getCloneQueue() != null){
-//					fieldSystem.clearArea();
-//					if (fieldSystem.inAttackRadius(lastUnit, x, y)){
-//						unitSystem.createUnit(UnitSystem.getCloneQueue(), x, Gdx.graphics.getHeight() - y);
-//						UnitSystem.setCloneQueue(null);
-//						lastUnit.played();
-//						releaseUnit();
-//					}else{
-//						menuSystem.openUnitMenu(lastUnit);
-//					}
-//				}else{
-//					if (!lastUnit.played) {
-//						lastUnit.undoMove();
-//						unitSystem.updateUnitPosition(lastUnit);
-//						menuSystem.clear();
-//						fieldSystem.selectMoveArea(lastUnit);
-//					}else{
-//						releaseUnit();
-//					}
-//				}
-//			}else{
-//				if (menuSystem.isOpenMenu()){
-//					menuSystem.clear();
-//				}else{
-//					menuSystem.openMenu(x, y);
-//				}
-//			}
-//		}
-		
-		if (unitSystem.checkWin()){
+
+		if (unit != null) {
+			stage = stage.concat("1");
+			if (lastUnit != null) {
+				if (unit.name.equals(lastUnit.name)) {
+					// open unit's menu
+					stage = stage.concat(".01");
+					menuSystem.openUnitMenu(lastUnit);
+					fieldSystem.clearArea();
+				} else if (!menuSystem.isOpenMenu()
+						&& !fieldSystem.isAttackState()) {
+					// change unit focus
+					stage = stage.concat(".02");
+					if (!unit.played && unit.playable) {
+						releaseUnit();
+						selectUnit(unit);
+					}
+				} else if (fieldSystem.isAttackState()) {
+					fieldSystem.clearArea();
+					if (fieldSystem.inAttackRadius(lastUnit, unit)) {
+						stage = stage.concat(".06");
+						Facing facing = UtilsBase.getFacing(lastUnit, unit);
+						lastUnit.attack(facing);
+						unit.damagedBy(lastUnit, facing);
+						unitSystem.adjustUnitPosition(lastUnit, unit, facing);
+						unitSystem.isPlayableUnitsDone();
+						fieldSystem.clearArea();
+						releaseUnit();
+					} else {
+						stage = stage.concat(".07");
+						menuSystem.openUnitMenu(lastUnit);
+					}
+				} else {
+					stage = stage.concat(".03");
+				}
+			} else {
+				stage = stage.concat(".0a");
+				if (!unit.played) {
+					selectUnit(unit);
+				}
+			}
+		} else {
+			stage = stage.concat("2");
+			if (lastUnit != null) {
+				if (fieldSystem.isMoveState()) {
+					fieldSystem.clearArea();
+					if (fieldSystem.inMoveRadius(lastUnit, x, y)) {
+						stage = stage.concat(".04");
+						float mapX = x - (x % Constants.SIZE);
+						float mapY = (Gdx.graphics.getHeight() - y)
+								- ((Gdx.graphics.getHeight() - y) % Constants.SIZE);
+						lastUnit.move(mapX, mapY);
+						unitSystem
+								.updateUnitPosition(lastUnit.name, mapX, mapY);
+						// menuSystem.openUnitMenu(lastUnit);
+					} else {
+						stage = stage.concat(".05");
+						releaseUnit();
+					}
+				} else if (lastUnit.type == Type.CLONER
+						&& fieldSystem.isAttackState()
+						&& UnitSystem.getCloneQueue() != null) {
+					fieldSystem.clearArea();
+					if (fieldSystem.inAttackRadius(lastUnit, x, y)) {
+						stage = stage.concat(".10");
+						unitSystem.createUnit(UnitSystem.getCloneQueue(), x,
+								Gdx.graphics.getHeight() - y);
+						UnitSystem.setCloneQueue(null);
+						lastUnit.played();
+						releaseUnit();
+					} else {
+						stage = stage.concat(".11");
+						menuSystem.openUnitMenu(lastUnit);
+					}
+				} else {
+					if (!lastUnit.played) {
+						stage = stage.concat(".09");
+						lastUnit.undoMove();
+						unitSystem.updateUnitPosition(lastUnit);
+						menuSystem.clear();
+						fieldSystem.selectMoveArea(lastUnit);
+					} else {
+						releaseUnit();
+					}
+				}
+			} else {
+				if (menuSystem.isOpenMenu()) {
+					stage = stage.concat(".0b");
+					menuSystem.clear();
+				} else {
+					stage = stage.concat(".0c");
+					menuSystem.openMenu(x, y);
+				}
+			}
+		}
+
+		Gdx.app.log(null, stage);
+
+		// if (unit != null){
+		// if (lastUnit != null){
+		// if (unit.name.equals(lastUnit.name)){
+		// //open unit's menu
+		// menuSystem.openUnitMenu(lastUnit);
+		// fieldSystem.clearArea();
+		// }else if (!menuSystem.isOpenMenu() && !fieldSystem.isAttackState()){
+		// //change unit focus
+		// if (!unit.played && unit.playable) {
+		// releaseUnit();
+		// selectUnit(unit);
+		// }
+		// }else if (fieldSystem.isAttackState()){
+		// fieldSystem.clearArea();
+		// if (fieldSystem.inAttackRadius(lastUnit, unit)){
+		// Facing facing = UtilsBase.getFacing(lastUnit, unit);
+		// lastUnit.attack(facing);
+		// unit.damagedBy(lastUnit, facing);
+		// unitSystem.adjustUnitPosition(lastUnit, unit, facing);
+		// unitSystem.isPlayableUnitsDone();
+		// fieldSystem.clearArea();
+		// releaseUnit();
+		// }else{
+		// menuSystem.openUnitMenu(lastUnit);
+		// }
+		// }
+		// }else{
+		// if (!unit.played){
+		// selectUnit(unit);
+		// }
+		// }
+		// }else{
+		// if (lastUnit != null){
+		// if (fieldSystem.isMoveState()){
+		// fieldSystem.clearArea();
+		// if (fieldSystem.inMoveRadius(lastUnit, x, y)) {
+		// float mapX = x - (x % Constants.SIZE);
+		// float mapY = (Gdx.graphics.getHeight() - y) -
+		// ((Gdx.graphics.getHeight() - y) % Constants.SIZE);
+		// lastUnit.move(mapX, mapY);
+		// unitSystem.updateUnitPosition(lastUnit.name, mapX, mapY);
+		// }else{
+		// releaseUnit();
+		// }
+		// }else if (lastUnit.type == Type.CLONER && fieldSystem.isAttackState()
+		// && UnitSystem.getCloneQueue() != null){
+		// fieldSystem.clearArea();
+		// if (fieldSystem.inAttackRadius(lastUnit, x, y)){
+		// unitSystem.createUnit(UnitSystem.getCloneQueue(), x,
+		// Gdx.graphics.getHeight() - y);
+		// UnitSystem.setCloneQueue(null);
+		// lastUnit.played();
+		// releaseUnit();
+		// }else{
+		// menuSystem.openUnitMenu(lastUnit);
+		// }
+		// }else{
+		// if (!lastUnit.played) {
+		// lastUnit.undoMove();
+		// unitSystem.updateUnitPosition(lastUnit);
+		// menuSystem.clear();
+		// fieldSystem.selectMoveArea(lastUnit);
+		// }else{
+		// releaseUnit();
+		// }
+		// }
+		// }else{
+		// if (menuSystem.isOpenMenu()){
+		// menuSystem.clear();
+		// }else{
+		// menuSystem.openMenu(x, y);
+		// }
+		// }
+		// }
+
+		if (unitSystem.checkWin()) {
 			inputSystem.enabled = false;
 			fadeOut(2f, false);
 		}
@@ -163,9 +263,9 @@ public class GameScreen extends AbstractScreen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		super.dispose();
-		
+
 		UnitSystem.setCloneQueue(null);
-		
+
 		fieldSystem = null;
 		hudSystem = null;
 		menuSystem = null;
@@ -191,15 +291,17 @@ public class GameScreen extends AbstractScreen {
 	@Override
 	public void notified(int id) {
 		// TODO Auto-generated method stub
-		if (id == 0){
-			stage.getRoot().action(FadeOut.$(2f).setCompletionListener(new OnActionCompleted() {
-				
-				@Override
-				public void completed(Action action) {
-					// TODO Auto-generated method stub
-					game.setScreen(game.getLevelScreen());
-				}
-			}));
+		if (id == 0) {
+			stage.getRoot().action(
+					FadeOut.$(2f).setCompletionListener(
+							new OnActionCompleted() {
+
+								@Override
+								public void completed(Action action) {
+									// TODO Auto-generated method stub
+									game.setScreen(game.getLevelScreen());
+								}
+							}));
 		}
 	}
 }
