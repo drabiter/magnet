@@ -86,7 +86,10 @@ public class MusicManager implements Disposable {
 	 */
 	public void pause() {
 		if (musicBeingPlayed != null) {
-			musicBeingPlayed.pause();
+			if (musicBeingPlayed.isPlaying())
+				musicBeingPlayed.pause();
+			else
+				musicBeingPlayed.play();
 		}
 	}
 

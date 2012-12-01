@@ -57,11 +57,12 @@ public class FieldSystem extends Group implements System{
 		int iy = oriRadius + (int) ((y - oriY) / Constants.SIZE);
 		
 		if (!areaMarker[ix][iy]) {
-			// TODO Auto-generated method stub
-			Tile tile = new Tile(screen.getTextureRegion(tileName), x, y);
-			area.addActor(tile);
-			areaMarker[ix][iy] = true;
-//			Gdx.app.log(null, "added "+x+" "+y);
+			if (MOVE_TILE.equals(tileName) || (x == oriX || y == oriY)) {
+				// TODO Auto-generated method stub
+				Tile tile = new Tile(screen.getTextureRegion(tileName), x, y);
+				area.addActor(tile);
+				areaMarker[ix][iy] = true;
+			}
 		}
 
 		if (radius > 0) {
@@ -81,7 +82,6 @@ public class FieldSystem extends Group implements System{
 		dx -= (int) (x / Constants.SIZE);
 		int dy = (int) (unit.y / Constants.SIZE);
 		dy -= (int) (Gdx.graphics.getHeight() - y) / Constants.SIZE;
-//		Gdx.app.log("move", dx+" "+dy);
 		return (Math.abs(dx) + Math.abs(dy)) <= Constants.MOVE_RANGE[unit.type.ordinal()];
 	}
 	

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.coffeefury.magnet.Magnet;
 import com.coffeefury.magnet.audio.MusicManager.GameMusic;
@@ -38,7 +39,31 @@ public class MenuScreen extends AbstractScreen {
 		});
 		getStage().addActor(play);
 		
-		Table table = getTable().bottom().height(25);
+		Table table = getTable().bottom();
+		
+		table.add(new TextButton("Toggle BGM", getSkin()){{
+			setClickListener(new ClickListener() {
+				
+				@Override
+				public void click(Actor actor, float x, float y) {
+					// TODO Auto-generated method stub
+					game.getMusicManager().pause();
+				}
+			});
+		}}).colspan(4).center().spaceTop(15);
+		table.row();
+		table.add(new TextButton("Toggle SFX", getSkin()){{
+			setClickListener(new ClickListener() {
+				
+				@Override
+				public void click(Actor actor, float x, float y) {
+					// TODO Auto-generated method stub
+					game.getSoundManager().setEnabled(!game.getSoundManager().isEnabled());
+				}
+			});
+		}}).colspan(4).center().spaceBottom(35);
+		table.row();
+		
 		table.add("Programmer : @drabiter").expandX();
 		table.add("Media & Levels : @g4ronk").expandX();
 		table.add("Contributor : @namrog84").expandX();

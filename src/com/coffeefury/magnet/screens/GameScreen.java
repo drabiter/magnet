@@ -78,6 +78,14 @@ public class GameScreen extends AbstractScreen {
 		menuSystem.clear();
 		game.getSoundManager().play(GameSound.SELECT);
 	}
+	
+	private void undoLastUnit(){
+		lastUnit.undoMove();
+		unitSystem.updateUnitPosition(lastUnit);
+		menuSystem.clear();
+		fieldSystem.selectMoveArea(lastUnit);
+		game.getSoundManager().play(GameSound.CANCEL);
+	}
 
 	public void touchUp(int x, int y) {
 
@@ -103,20 +111,25 @@ public class GameScreen extends AbstractScreen {
 					}
 				} else if (fieldSystem.isAttackState()) {
 					fieldSystem.clearArea();
-					if (fieldSystem.inAttackRadius(lastUnit, unit)) {
-						Facing facing = UtilsBase.getFacing(lastUnit, unit);
-						lastUnit.attack(facing);
-						unit.damagedBy(lastUnit, facing);
-						unitSystem.adjustUnitPosition(lastUnit, unit, facing);
-						fieldSystem.clearArea();
-						game.getSoundManager()
-								.play((lastUnit.type == Type.CLONER) ? GameSound.CLONE_START
-										: GameSound.THROWPULL);
-						releaseUnit();
-						if (unitSystem.isPlayableUnitsDone())
-							this.notified(GameScreen.PLAYED);
-					} else {
-						menuSystem.openUnitMenu(lastUnit);
+					if (lastUnit.type == Type.CLONER && !unit.playable) {
+						undoLastUnit();
+					}else{
+						if (fieldSystem.inAttackRadius(lastUnit, unit)) {
+							Facing facing = UtilsBase.getFacing(lastUnit, unit);
+							lastUnit.attack(facing);
+							unit.damagedBy(lastUnit, facing);
+							unitSystem.adjustUnitPosition(lastUnit, unit,
+									facing);
+							fieldSystem.clearArea();
+							game.getSoundManager()
+									.play((lastUnit.type == Type.CLONER) ? GameSound.CLONE_START
+											: GameSound.THROWPULL);
+							releaseUnit();
+							if (unitSystem.isPlayableUnitsDone())
+								this.notified(GameScreen.PLAYED);
+						} else {
+							menuSystem.openUnitMenu(lastUnit);
+						}
 					}
 				}
 			} else {
@@ -156,11 +169,7 @@ public class GameScreen extends AbstractScreen {
 					}
 				} else {
 					if (!lastUnit.played) {
-						lastUnit.undoMove();
-						unitSystem.updateUnitPosition(lastUnit);
-						menuSystem.clear();
-						fieldSystem.selectMoveArea(lastUnit);
-						game.getSoundManager().play(GameSound.CANCEL);
+						undoLastUnit();
 					} else {
 						releaseUnit();
 						game.getSoundManager().play(GameSound.CANCEL);
